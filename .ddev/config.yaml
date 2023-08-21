@@ -13,6 +13,9 @@ use_dns_when_possible: true
 composer_version: "2"
 web_environment: []
 nodejs_version: "18"
+hooks:
+  post-start:
+    - exec: "php artisan queue:work &"
 
 # Key features of ddev's config.yaml:
 
