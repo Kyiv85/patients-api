@@ -1,0 +1,121 @@
+#ddev-generated
+
+http:
+  routers:
+    
+    
+    pacients-api-phpmyadmin-80-http:
+      
+      rule: HostRegexp(`pacients-api.ddev.site`)
+      
+      service: "pacients-api-phpmyadmin-80-http"
+      tls: false
+      entrypoints:
+        - http-8036
+    
+    
+    
+    pacients-api-web-80-http:
+      
+      rule: HostRegexp(`pacients-api.ddev.site`)
+      
+      service: "pacients-api-web-80-http"
+      tls: false
+      entrypoints:
+        - http-80
+    
+    
+    pacients-api-web-8025-http:
+      
+      rule: HostRegexp(`pacients-api.ddev.site`)
+      
+      service: "pacients-api-web-8025-http"
+      tls: false
+      entrypoints:
+        - http-8025
+    
+    
+    
+    
+    
+    pacients-api-phpmyadmin-80-https:
+      
+      rule: HostRegexp(`pacients-api.ddev.site`)
+      
+      service: "pacients-api-phpmyadmin-80-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-8037
+    
+    
+    
+    
+    pacients-api-web-80-https:
+      
+      rule: HostRegexp(`pacients-api.ddev.site`)
+      
+      service: "pacients-api-web-80-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-443
+    
+    
+    pacients-api-web-8025-https:
+      
+      rule: HostRegexp(`pacients-api.ddev.site`)
+      
+      service: "pacients-api-web-8025-https"
+      
+      tls: true
+      
+      entrypoints:
+        - http-8026
+    
+    
+
+  services:
+    
+    pacients-api-phpmyadmin-80-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-pacients-api-phpmyadmin:80
+    
+    pacients-api-phpmyadmin-80-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-pacients-api-phpmyadmin:80
+    
+    pacients-api-web-80-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-pacients-api-web:80
+    
+    pacients-api-web-8025-http:
+      loadbalancer:
+        servers:
+          - url: http://ddev-pacients-api-web:8025
+    
+    pacients-api-web-80-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-pacients-api-web:80
+    
+    pacients-api-web-8025-https:
+    
+      loadbalancer:
+        servers:
+          - url: http://ddev-pacients-api-web:8025
+    
+
+
+tls:
+  certificates:
+    - certFile: /mnt/ddev-global-cache/traefik/certs/pacients-api.crt
+      keyFile: /mnt/ddev-global-cache/traefik/certs/pacients-api.key
+
