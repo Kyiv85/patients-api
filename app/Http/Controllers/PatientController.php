@@ -8,7 +8,10 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\Patient;
 
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Http\Exceptions\HttpResponseException;
+
+use App\Mail\ConfirmationEmail;
 
 class PatientController extends Controller
 {
@@ -44,6 +47,12 @@ class PatientController extends Controller
         } catch (HttpResponseException $e) {
             return response()->json(['message' => 'Error saving patient information'], 401);
         }
+
+        // Send async email
+        dispatch(function () use ($patient) {
+            Mail::to($patient->email)->send(new ConfirmationEmail($patient));
+        })->afterResponse();
+    
 
         return response()->json(['message' => 'Patient registered successfully'], 200);
     }
